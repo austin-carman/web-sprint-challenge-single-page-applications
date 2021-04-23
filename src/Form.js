@@ -49,7 +49,7 @@ export default function Form(props) {
                         <input 
                             type='checkbox'
                             name='pepperoni'
-                            value={values.pepperoni}
+                            checked={values.pepperoni}
                             onChange={toChange}    
                         />
                         Pepperoni
@@ -59,7 +59,7 @@ export default function Form(props) {
                         <input 
                             type='checkbox'
                             name='bacon'
-                            value={values.bacon}
+                            checked={values.bacon}
                             onChange={toChange}    
                         />
                         Bacon
@@ -69,7 +69,7 @@ export default function Form(props) {
                         <input 
                             type='checkbox'
                             name='mushrooms'
-                            value={values.mushrooms}
+                            checked={values.mushrooms}
                             onChange={toChange}    
                         />
                         Mushrooms
@@ -79,7 +79,7 @@ export default function Form(props) {
                         <input 
                             type='checkbox'
                             name='pineapple'
-                            value={values.pineapple}
+                            checked={values.pineapple}
                             onChange={toChange}    
                         />
                         Pineapple

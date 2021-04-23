@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Switch, Route } from 'react-router-dom'
 import Home from './Home'
 import Form from './Form'
-import Confirmation from './Confirmation'
 import * as yup from 'yup'
 import schema from './validation/formSchema'
 import axios from 'axios'
+
 
 
 
@@ -30,8 +30,8 @@ const initialFormErrors = {
 
 
 export default function App() {
-  const [formErrors, setFormErrors ] = useState(initialFormErrors)
   const [ orders, setOrders ]  = useState(initialOrders)
+  const [formErrors, setFormErrors ] = useState(initialFormErrors)
   const [ formValues, setFormValues ] = useState(initialFormValues);
 
   const change = (name, value) => {
@@ -65,29 +65,29 @@ export default function App() {
   const postOrder = (newOrder) => {
     axios.post('https://reqres.in/api/orders', newOrder)
       .then((res) => {
+        console.log(res.data);
         setOrders([...orders, res.data])
         setFormValues(initialFormValues)
       })
       .catch((err) => {
         console.log('error:', err);
       })
-  }
 
-
-
+    }
+    
+    
   return (
     <>
       <nav>
         <h1>Lambda Eats</h1>
         <div>
-          <Link to='/'>Home</Link>
+          <Link id='order-pizza' to='/'>Home</Link>
           <Link to='/pizza'>Order Now</Link>
         </div>
       </nav>
 
       <Switch>
-        <Route path='/confirmation/:id'>
-          <Confirmation />
+        <Route path='/orders'>
         </Route>
         <Route path='/pizza'>
           <Form values={formValues} change={change} submit={submitForm} errors={formErrors} />
@@ -96,7 +96,6 @@ export default function App() {
           <Home />
         </Route>
       </Switch>
-
     </>
   );
 }
