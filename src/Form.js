@@ -2,11 +2,12 @@ import React from "react";
 
 
 export default function Form(props) {
-    const { values, change, submit } = props
+    const { values, change, submit, errors } = props
 
     const toChange = (evt) => {
-        const { name, value } = evt.target
-        change(name, value)
+        const { name, value, type, checked } = evt.target
+        const input =  type === 'checkbox' ? checked : value
+        change(name, input)
     }
 
     const toSubmit = (evt) => {
@@ -26,6 +27,7 @@ export default function Form(props) {
                 <div className='form-container'>
                     <label> Name:
                         <input
+                            id='name-input'
                             type='text'
                             name='name'
                             value={values.name}
@@ -35,7 +37,7 @@ export default function Form(props) {
                     </label>
 
                     <label> Size:
-                        <select name='size' value={values.size} onChange={toChange}>
+                        <select id='size-dropdown' name='size' value={values.size} onChange={toChange}>
                             <option value=''>-- Select a size --</option>
                             <option value='small'>Small</option>
                             <option value='medium'>Medium</option>
@@ -52,6 +54,7 @@ export default function Form(props) {
                         />
                         Pepperoni
                     </label>
+
                     <label> 
                         <input 
                             type='checkbox'
@@ -61,6 +64,7 @@ export default function Form(props) {
                         />
                         Bacon
                     </label>
+
                     <label> 
                         <input 
                             type='checkbox'
@@ -70,6 +74,7 @@ export default function Form(props) {
                         />
                         Mushrooms
                     </label>
+
                     <label> 
                         <input 
                             type='checkbox'
@@ -82,6 +87,7 @@ export default function Form(props) {
 
                     <label> Special Instructions:
                         <input
+                            id='special-text'
                             type='text'
                             name='instructions'
                             value={values.instructions}
@@ -89,7 +95,13 @@ export default function Form(props) {
                             placeholder='Enter Name'
                         />
                     </label>
-                    <button>Submit Order</button>
+
+                    <div className='error-messages'>
+                        <div>{errors.name}</div>
+                        <div>{errors.size}</div>
+                    </div>
+
+                    <button id='order-button'>Add to Order</button>
                 </div>
             </form>
         </>
