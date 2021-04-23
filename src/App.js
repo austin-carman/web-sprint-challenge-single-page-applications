@@ -27,12 +27,15 @@ const initialFormErrors = {
   instructions: '',
 }
 
+const initialDisabled = true
+
 
 
 export default function App() {
-  const [ orders, setOrders ]  = useState(initialOrders)
-  const [formErrors, setFormErrors ] = useState(initialFormErrors)
+  const [ orders, setOrders ]  = useState(initialOrders);
+  const [formErrors, setFormErrors ] = useState(initialFormErrors);
   const [ formValues, setFormValues ] = useState(initialFormValues);
+  const [disabled, setDisabled ] = useState(initialDisabled);
 
   const change = (name, value) => {
     yup
@@ -73,6 +76,12 @@ export default function App() {
         console.log('error:', err);
       })
     }
+
+    useEffect(() => {
+      schema.isValid(formValues).then(valid => {
+        setDisabled(!valid)
+      })
+    },[formValues]);
   
     
   return (
@@ -89,7 +98,7 @@ export default function App() {
         <Route path='/orders/'>
         </Route>
         <Route path='/pizza'>
-          <Form values={formValues} change={change} submit={submitForm} errors={formErrors} />
+          <Form values={formValues} change={change} submit={submitForm} errors={formErrors} disabled={disabled} />
         </Route>
         <Route path='/'>
           <Home />

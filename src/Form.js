@@ -2,7 +2,7 @@ import React from "react";
 
 
 export default function Form(props) {
-    const { values, change, submit, errors } = props
+    const { values, change, submit, errors, disabled } = props
 
     const toChange = (evt) => {
         const { name, value, type, checked } = evt.target
@@ -101,7 +101,7 @@ export default function Form(props) {
                         <div>{errors.size}</div>
                     </div>
 
-                    <button id='order-button'>Add to Order</button>
+                    <button id='order-button' disabled={disabled}>Add to Order</button>
                 </div>
             </form>
         </>
