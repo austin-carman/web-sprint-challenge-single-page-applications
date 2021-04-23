@@ -56,7 +56,7 @@ export default function App() {
       bacon: formValues.bacon,
       mushrooms: formValues.mushrooms,
       pineapple: formValues.pineapple,
-      // toppings: ['pepperoni', 'bacon', 'mushrooms', 'pineapple'].filter(topping => formValues[topping]),
+      // toppings: ['pepperoni', 'bacon', 'mushrooms', 'pineapple'].filter(topping => formValues[topping]), // is it better to do this or each topping separately as done above?
       instructions: formValues.instructions.trim(),
     }
     postOrder(newOrder);
@@ -72,9 +72,8 @@ export default function App() {
       .catch((err) => {
         console.log('error:', err);
       })
-
     }
-    
+  
     
   return (
     <>
@@ -87,7 +86,7 @@ export default function App() {
       </nav>
 
       <Switch>
-        <Route path='/orders'>
+        <Route path='/orders/'>
         </Route>
         <Route path='/pizza'>
           <Form values={formValues} change={change} submit={submitForm} errors={formErrors} />
